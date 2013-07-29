@@ -1,0 +1,26 @@
+{
+  "name": "icinga-cucumber",
+  "version": "0.1.0",
+  "description": "Cucumber plugin for Icinga/Nagios",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/simondean/icinga-cucumber.git"
+  },
+  "keywords": [
+    "cucumber",
+    "icinga",
+    "nagios",
+    "acceptance",
+    "testing",
+    "tests",
+    "monitoring",
+    "health",
+    "journey"
+  ],
+  "author": "Simon Dean",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/simondean/icinga-cucumber/issues"
+  }
+}
