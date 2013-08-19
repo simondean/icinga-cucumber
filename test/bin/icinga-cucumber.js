@@ -5,8 +5,8 @@ describe('the icinga-cucumber binary', function () {
     var child;
 
     beforeEach(function (done) {
-      child = ChildProcess.spawn('node', ['bin/icinga-cucumber', '-b', 'monkey_patches/.bin/cucumber-js', '-t', '@passing-scenario'], {
-        cwd: '.'
+      child = ChildProcess.spawn('node', ['../bin/icinga-cucumber', '-b', 'monkey_patches/.bin/cucumber-js', '-t', '@passing-scenario'], {
+        cwd: 'test_assets'
       });
 
       done();
