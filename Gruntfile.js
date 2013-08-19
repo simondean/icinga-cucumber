@@ -8,13 +8,18 @@ module.exports = function(grunt) {
         require: ['should']
       },
       all: ['test/**/*.js']
+    },
+    cuketree: {
+      default: {}
     }
   });
 
   grunt.loadNpmTasks('grunt-mocha-cli');
+  grunt.loadNpmTasks('grunt-cuke-tree');
 
   // Default task(s).
   grunt.registerTask('test', ['mochacli']);
-  grunt.registerTask('default', ['test']);
+  grunt.registerTask('acceptance_test', ['cuketree']);
+  grunt.registerTask('default', ['test', 'acceptance_test']);
 
 };
