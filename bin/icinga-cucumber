@@ -3,6 +3,7 @@
 'use strict';
 
 var Debug = require('debug')('icinga-cucumber')
+var IcingaCucumber = require('../');
 
 function exit(code) {
   Debug("Exiting with code " + code);
@@ -14,4 +15,8 @@ function exit(code) {
   });
 };
 
-exit(0);
+var options = {};
+
+IcingaCucumber(options).run(function() {
+  exit(0);
+});
