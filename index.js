@@ -9,7 +9,7 @@ var IcingaCucumber = function(options) {
 IcingaCucumber.prototype.run = function(callback) {
   var self = this;
 
-  console.log('OK: Scenario passed');
+  console.log("OK: Scenario passed | 'Total duration'=12.345s 'Step 1 - Given a passing pre-condition'=0.123s 'Step 2 - When a passing action is executed'=0.123s 'Step 3 - Then a post-condition passes'=0.123s");
 
   callback();
 }
