@@ -20,7 +20,7 @@ describe('the icinga-cucumber binary', function () {
     })
 
     describe('the stdout', function () {
-      var stdout, lines, firstLineParts;
+      var stdout, lines;
 
       beforeEach(function (done) {
         stdout = [];
@@ -31,27 +31,51 @@ describe('the icinga-cucumber binary', function () {
 
         child.on('exit', function (code, signal) {
           stdout = stdout.join('');
-          lines = stdout.split(/\r?\n/);
-          lines.length.should.above(-1);
-          firstLineParts = lines[0].split(' | ');
           done();
         });
       });
 
-      it('should include the service status', function (done) {
-        firstLineParts[0].should.equal('OK: Scenario passed');
-        done();
+      describe('the first line', function () {
+        var firstLineParts;
+
+        beforeEach(function (done) {
+          var firstLine = stdout.split(/\r?\n/)[0];
+          firstLineParts = firstLine.split(' | ');
+          done();
+        });
+
+        it('should include the service status', function (done) {
+          firstLineParts[0].should.equal('OK: Scenario passed');
+          done();
+        });
+
+        it('should include the performance data', function (done) {
+          firstLineParts.length.should.be.above(0);
+          firstLineParts[1].should.match(/^'Total duration'=\d+\.\d{3}s 'Step 1 - Given a passing pre-condition'=\d+\.\d{3}s 'Step 2 - When a passing action is executed'=\d+\.\d{3}s 'Step 3 - Then a post-condition passes'=\d+\.\d{3}s$/);
+          done();
+        });
+
+        it('should only include two parts', function (done) {
+          firstLineParts.length.should.equal(2);
+          done();
+        });
       });
 
-      it('should include the performance data', function (done) {
-        firstLineParts.length.should.be.above(0);
-        firstLineParts[1].should.match(/^'Total duration'=\d+\.\d{3}s 'Step 1 - Given a passing pre-condition'=\d+\.\d{3}s 'Step 2 - When a passing action is executed'=\d+\.\d{3}s 'Step 3 - Then a post-condition passes'=\d+\.\d{3}s$/);
-        done();
-      });
+      describe('second and subsequent lines', function () {
+        var extraLines;
 
-      it('should only include two parts on the first line', function (done) {
-        firstLineParts.length.should.equal(2);
-        done();
+        beforeEach(function (done) {
+          extraLines = stdout.split(/(\r?\n)/).slice(2).join('');
+          done();
+        });
+
+        it('should include the status of each step', function (done) {
+          extraLines.should.equal('Steps:\n' +
+            '  - Step 1: Given a passing pre-condition\n' +
+            '  - Step 2: When a passing action is executed\n' +
+            '  - Step 3: Then a post-condition passes\n');
+          done();
+        });
       });
     });
   });
