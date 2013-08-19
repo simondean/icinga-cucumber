@@ -22,5 +22,14 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/simondean/icinga-cucumber/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-mocha-cli": "~1.0.6",
+    "cucumber": "~0.3.0",
+    "should": "~1.2.2"
+  },
+  "dependencies": {
+    "debug": "~0.7.2"
   }
 }
