@@ -7,6 +7,10 @@ module.exports = function() {
     callback();
   });
 
+  this.When(/^a failing action is executed$/, function(callback) {
+    callback("Failed");
+  });
+
   this.Then(/^a post-condition passes$/, function(callback) {
     callback();
   });

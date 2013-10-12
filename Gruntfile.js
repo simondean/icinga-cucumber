@@ -3,23 +3,35 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    mochacli: {
+    clean: {
+      tests: ['build'],
+    },
+    jshint: {
+      all: [
+        'Gruntfile.js',
+        'features/**/*.js',
+      ],
       options: {
-        require: ['should']
+        jshintrc: '.jshintrc',
       },
-      all: ['test/**/*.js']
     },
     cuketree: {
-      default: {}
+      default: {},
+      ide: {
+        options: {
+          config: 'ide'
+        }
+      }
     }
   });
 
-  grunt.loadNpmTasks('grunt-mocha-cli');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-cuke-tree');
 
   // Default task(s).
-  grunt.registerTask('test', ['mochacli']);
-  grunt.registerTask('acceptance_test', ['cuketree']);
-  grunt.registerTask('default', ['test', 'acceptance_test']);
+  grunt.registerTask('acceptance_test', ['cuketree:default']);
+  grunt.registerTask('acceptance_test:ide', ['cuketree:ide']);
+  grunt.registerTask('default', ['jshint', 'acceptance_test']);
 
 };
