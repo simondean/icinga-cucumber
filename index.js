@@ -1,7 +1,13 @@
+console.error('hello');
+
+var Configuration = require('./lib/configuration.js')
+
 var IcingaCucumber = function(options) {
   if (!(this instanceof IcingaCucumber)) return new IcingaCucumber(options);
 
   var self = this;
+
+  self.configuration = new self.Configuration();
 
   return self;
 }
@@ -18,5 +24,7 @@ IcingaCucumber.prototype.run = function(callback) {
 
   callback();
 }
+
+IcingaCucumber.prototype.Configuration = Configuration;
 
 module.exports = IcingaCucumber;

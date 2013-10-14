@@ -23,6 +23,10 @@
   "bugs": {
     "url": "https://github.com/simondean/icinga-cucumber/issues"
   },
+  "dependencies": {
+    "debug": "~0.7.2",
+    "optimist": "~0.6.0"
+  },
   "devDependencies": {
     "cucumber": "~0.3.1",
     "myriad-cucumber": "~0.2.6",
@@ -32,8 +36,5 @@
     "cuke-tree": "~0.2.21",
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-clean": "~0.4.1"
-  },
-  "dependencies": {
-    "debug": "~0.7.2"
   }
 }

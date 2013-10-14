@@ -7,6 +7,7 @@ module.exports = function() {
     var world = this;
 
     world.child = ChildProcess.spawn('node', ['../bin/icinga-cucumber', '-b', 'monkey_patches/.bin/cucumber-js', '-t', tag], {
+      stdio: ['ignore', 'pipe', process.stderr],
       cwd: 'test_assets'
     });
 
@@ -29,8 +30,8 @@ module.exports = function() {
 
     var world = this;
 
-    if (world.exitCode !== exitCode) {
-      callback({ message: 'Unexpected value', expected: exitCode, actual: world.exitCode});
+    if (world.exitCode !== parseInt(exitCode, 10)) {
+      callback(JSON.stringify({ message: 'Unexpected value', expected: exitCode, actual: world.exitCode, stdout: world.stdout }));
     }
     else {
       callback();
@@ -45,7 +46,7 @@ module.exports = function() {
     var firstLine = world.stdout.split(/\r?\n/)[0];
 
     if (!new RegExp(firstLinePattern).test(firstLine)) {
-      callback({ message: 'Unexpected value', expectedPattern: firstLinePattern, actual: firstLine });
+      callback(JSON.stringify({ message: 'Unexpected value', expectedPattern: firstLinePattern, actual: firstLine }));
     }
     else {
       callback();
